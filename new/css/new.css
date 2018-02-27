@@ -17,7 +17,13 @@ h1 { margin: 70px 70px 0px 70px ; font: 0px "Microsoft Yahei"; text-align: cente
 
 .divImgRight{
 	float:left;
-	width:80%
+	width:80%;
+	cursor:pointer;
+
+}
+
+.divImgRight:hover{
+	box-shadow: 2px 4px 6px #000;
 }
 
 .divImgLeft{
