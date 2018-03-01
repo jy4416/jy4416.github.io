@@ -26,39 +26,17 @@
 		<meta name="msapplication-TileColor" content="#f01d4f">
 		<meta name="msapplication-TileImage" content="http://samuelbradley.com/wp-content/themes/samuelbradley/build/images/win8-tile-icon.png">
         <meta name="theme-color" content="#121212">
-
 		<link rel="pingback" href="xmlrpc.php.html">
 
 				
 <!-- This site is optimized with the Yoast SEO plugin v4.4 - https://yoast.com/wordpress/plugins/seo/ -->
-<meta name="description" content="Samuel Bradley - Award Winning Photographer - London and New York - Clients Burberry, Dior, Harvey Nichols, Uniqlo, AnOther, FADER, Asos, Timberland."/>
-<meta name="robots" content="noodp"/>
+<meta name="description" content="金伟琦建筑摄影"/>
+<meta name="keywords" content="金伟琦,建筑摄影,摄影"/>
 <link rel="canonical" href="index.html" />
-<meta property="og:locale" content="en_GB" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Samuel Bradley" />
-<meta property="og:description" content="Samuel Bradley - Award Winning Photographer - London and New York - Clients Burberry, Dior, Harvey Nichols, Uniqlo, AnOther, FADER, Asos, Timberland." />
-<meta property="og:url" content="http://samuelbradley.com/" />
-<meta property="og:site_name" content="Samuel Bradley" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:description" content="Samuel Bradley - Award Winning Photographer - London and New York - Clients Burberry, Dior, Harvey Nichols, Uniqlo, AnOther, FADER, Asos, Timberland." />
-<meta name="twitter:title" content="Samuel Bradley Photography" />
-<meta name="twitter:image" content="http://sb.allismachine.com/wp-content/uploads/2016/09/SB_SS1700001.jpg" />
-<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"http:\/\/samuelbradley.com\/","name":"Samuel Bradley","potentialAction":{"@type":"SearchAction","target":"http:\/\/samuelbradley.com\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
-<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"Person","url":"http:\/\/samuelbradley.com\/","sameAs":["http:\/\/samuelbradley"],"@id":"#person","name":"Samuel Bradley"}</script>
-<!-- / Yoast SEO plugin. -->
-
 <link rel="alternate" type="application/rss+xml" title="Samuel Bradley &raquo; Feed" href="feed/index.html" />
 <link rel="alternate" type="application/rss+xml" title="Samuel Bradley &raquo; Comments Feed" href="comments/feed/index.html" />
 <link rel='stylesheet' id='allismachine-stylesheet-css'  href='wp-content/themes/samuelbradley/build/css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='flexslider-stylesheet-css'  href='wp-content/themes/samuelbradley/build/css/flexslider.css' type='text/css' media='all' />
-<script type='text/javascript' src='wp-content/themes/samuelbradley/build/js/libs/modernizr.custom.min.js'></script>
-<script type='text/javascript' src='wp-includes/js/jquery/jquery.js'></script>
-<script type='text/javascript' src='wp-includes/js/jquery/jquery-migrate.min.js'></script>
-<link rel='https://api.w.org/' href='wp-json/index.html' />
-<link rel='shortlink' href='index.html' />
-<link rel="alternate" type="application/json+oembed" href="wp-json/oembed/1.0/embed/url=http//samuelbradley.com/.html" />
-<link rel="alternate" type="text/xml+oembed" href="wp-json/oembed/1.0/embed/url=http//samuelbradley.com/#038;format=xml.html" />
+
 		
 				<meta name="google-site-verification" content="ag909nEKG98as0v4YfnzsLjPMkOyjHK9PzklP8zWhhM">
 		
@@ -121,8 +99,8 @@
 			<article class="portfolio-listing__item">
 					
 				    <div class="portfolio-listing__image">
-				    
-					     <img src="new/img/tsnc/1.jpg">			   
+				    <a href="new/index.html"> <img src="new/img/tsnc/1.jpg">	</a>
+					    		   
 					</div>
 
 					<div class="portfolio-listing__title">
@@ -321,15 +299,20 @@
 		var adTimer = null;
 		// 开始计时
         adTimer = setInterval(function () {
+        	$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
             index++;
            if(index==9){
            		index=0;
-           		$( ".portfolio-listing__item" ).first().addClass( "show-project-always" );
+           		$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
            }
 
            $( ".portfolio-listing__item" ).removeClass( "show-project" );
 
            $( ".portfolio-listing__item" ).eq(index).toggleClass( "show-project" );
+
+
+           $(".portfolio-listing__title").eq(index).fadeTo(1000,0.4);
+          
 
             if ($( ".portfolio-listing__item" ).hasClass( "show-project" )) {
               $( ".portfolio-listing__item" ).removeClass( "show-project-always" );
@@ -350,9 +333,11 @@
 		            clearTimeout(adTimer);
 		        }
 		        
+		        $(".portfolio-listing__title").fadeTo(0.4,1000);
 		        $( ".portfolio-listing__item" ).removeClass( "show-project" );
 
 		        $(this).parent().parent(".portfolio-listing__item").toggleClass( "show-project" );
+
 
 	            if ($( ".portfolio-listing__item" ).hasClass( "show-project" )) {
 	              $( ".portfolio-listing__item" ).removeClass( "show-project-always" );
@@ -366,14 +351,17 @@
 		         console.info("leave");
 		        // 开始计时
 		        adTimer = setInterval(function () {
+		        	$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
 		            index++;
 		           if(index==9){
 		           		index=0;
+		           		$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
 		           }
 
 		           $( ".portfolio-listing__item" ).removeClass( "show-project" );
 
 		           $( ".portfolio-listing__item" ).eq(index).toggleClass( "show-project" );
+		           $(".portfolio-listing__title").eq(index).fadeTo(1000,0.4);
 
 		            if ($( ".portfolio-listing__item" ).hasClass( "show-project" )) {
 		              $( ".portfolio-listing__item" ).removeClass( "show-project-always" );
