@@ -11,7 +11,7 @@ h1 { margin: 70px 70px 0px 70px ; font: 0px "Microsoft Yahei"; text-align: cente
 .menu a:hover { background-color: #eee;}
 .menu .cur { color: #000; background-color: #fff !important;}
 
-.dowebok { width: 900px; margin: 0 auto; font-size: 0;margin-bottom:0px;}
+.dowebok { width: 90%; margin: 0 auto; font-size: 0;margin-bottom:0px;}
 .dowebok li { display: inline-block; width: 100%; margin-left: 1%; padding-top: 2px;}
 .dowebok li img { width: 100%;}
 
@@ -21,6 +21,7 @@ h1 { margin: 70px 70px 0px 70px ; font: 0px "Microsoft Yahei"; text-align: cente
 	cursor:pointer;
 
 }
+
 
 .divImgRight:hover{
 	box-shadow: 2px 4px 6px #000;
