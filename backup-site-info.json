@@ -1,0 +1,370 @@
+{
+  "建筑 / Architecture": [
+    {
+      "folder": "anhi",
+      "cn_name": "安之若宿·山",
+      "en_name": "ANNSO HILL",
+      "location": "Tengchong ,Yunnan province",
+      "designer": "STUDIO QI",
+      "year": "2019",
+      "image_count": 20
+    },
+    {
+      "folder": "vose",
+      "cn_name": "可变办公空间",
+      "en_name": "Variable office space",
+      "location": "Beijing",
+      "designer": "LUO Studio",
+      "year": "2019",
+      "image_count": 10
+    },
+    {
+      "folder": "tsms",
+      "cn_name": "胜利市场临时安置点",
+      "en_name": "Temporary Site of Shengli Market",
+      "location": "Puyang City, Henan Province",
+      "designer": "LUO Studio",
+      "year": "2019",
+      "image_count": 13
+    },
+    {
+      "folder": "phwh",
+      "cn_name": "自在平江野奢酒店",
+      "en_name": "Pingjiang Homey Wild Luxury Hotel",
+      "location": "Baimao Village, Pingjiang County, Hunan Province",
+      "designer": "Beijing Duoxiangjie Architectural Design Co., Ltd",
+      "year": "2019",
+      "image_count": 19
+    },
+    {
+      "folder": "bolc",
+      "cn_name": "陵川书屋",
+      "en_name": "Bookstore of Lingchuan",
+      "location": "hanxi",
+      "designer": "LUO Studio",
+      "year": "2019",
+      "image_count": 11
+    },
+    {
+      "folder": "ksms",
+      "cn_name": "克拉玛依科技博物馆",
+      "en_name": "Karamay Science Museums",
+      "location": "Karamay",
+      "designer": "BIAD",
+      "year": "2019",
+      "image_count": 15
+    },
+    {
+      "folder": "jged",
+      "cn_name": "局里民宿设计",
+      "en_name": "Juli Guesthouse Design",
+      "location": "Beijing",
+      "designer": "BIAD",
+      "year": "2019",
+      "image_count": 10
+    },
+    {
+      "folder": "kahd",
+      "cn_name": "韩国住宅设计",
+      "en_name": "Korea Home Design",
+      "location": "Seoul",
+      "designer": "JULY Architecture",
+      "year": "2019",
+      "image_count": 13
+    },
+    {
+      "folder": "ssca",
+      "cn_name": "种子影院",
+      "en_name": "Seeds Cinema",
+      "location": "Fenyang Shanxi",
+      "designer": "Shimu Wang",
+      "year": "2019",
+      "image_count": 9
+    },
+    {
+      "folder": "bcbg",
+      "cn_name": "大小咖啡北锣鼓巷店",
+      "en_name": "BigSmall Coffee Beiluoguxiang",
+      "location": "Beijing",
+      "designer": "RESERVE",
+      "year": "2019",
+      "image_count": 8
+    },
+    {
+      "folder": "ioma",
+      "cn_name": "爱马思艺术中心",
+      "en_name": "IOMA",
+      "location": "Beijing",
+      "designer": "ARCHSTUDIO",
+      "year": "2019",
+      "image_count": 10
+    },
+    {
+      "folder": "bjdy",
+      "cn_name": "叠院儿",
+      "en_name": "Layering Courtyard",
+      "location": "Qianmen, Beijing, China",
+      "designer": "ARCHSTUDIO",
+      "year": "2018",
+      "image_count": 15
+    },
+    {
+      "folder": "dsby",
+      "cn_name": "别苑",
+      "en_name": "Bie Yard",
+      "location": "Xin County, Henan Province",
+      "designer": "3andwich Design",
+      "year": "2018",
+      "image_count": 13
+    },
+    {
+      "folder": "dljm",
+      "cn_name": "吉姆餐厅（大理店）",
+      "en_name": "Mom restaurant",
+      "location": "Dali city,Yunnan province",
+      "designer": "AML Design studio",
+      "year": "2018",
+      "image_count": 11
+    },
+    {
+      "folder": "dbok",
+      "cn_name": "小溪家",
+      "en_name": "Springing Stream",
+      "location": "Fuding , China",
+      "designer": "WEI architects",
+      "year": "2017",
+      "image_count": 0
+    },
+    {
+      "folder": "ldzl",
+      "cn_name": "楼顶竹林间",
+      "en_name": "Bamboo Forest on the Roof",
+      "location": "Beijing",
+      "designer": "V STUDIO",
+      "year": "2017",
+      "image_count": 15
+    },
+    {
+      "folder": "bjny",
+      "cn_name": "扭院儿",
+      "en_name": "Twisting Courtyard",
+      "location": "Qianmen, Beijing, China",
+      "designer": "ARCHSTUDIO",
+      "year": "2017",
+      "image_count": 6
+    },
+    {
+      "folder": "ykzx",
+      "cn_name": "安龙游客服务中心",
+      "en_name": "Tourist Center of Anlong Limestone Resort",
+      "location": "Dushan Town,Guizhou Province",
+      "designer": "3andwich Design",
+      "year": "2017",
+      "image_count": 16
+    },
+    {
+      "folder": "sdms",
+      "cn_name": "溶岩美术馆",
+      "en_name": "Limestone Gallery",
+      "location": "Dushan Town,Guizhou Province",
+      "designer": "3andwich Design",
+      "year": "2017",
+      "image_count": 14
+    },
+    {
+      "folder": "fjsp",
+      "cn_name": "上坪古村复兴计划之水口篇",
+      "en_name": "Shangping Village Regeneration – Shuikou Area",
+      "location": "Xiyuan Town, Fujian Province",
+      "designer": "3andwich Design",
+      "year": "2017",
+      "image_count": 11
+    },
+    {
+      "folder": "jzps",
+      "cn_name": "央美十工作室毕业设计",
+      "en_name": "CAFA Graduation design",
+      "location": "Beijing",
+      "designer": "CAFA 10th Design studio",
+      "year": "2017",
+      "image_count": 10
+    },
+    {
+      "folder": "dowebok",
+      "cn_name": "有机农场",
+      "en_name": "Tangshan Organic Farm",
+      "location": "Guye District, Hebei Province, China",
+      "designer": "ARCHSTUDIO",
+      "year": "2016",
+      "image_count": 0
+    },
+    {
+      "folder": "tsft",
+      "cn_name": "水岸佛堂",
+      "en_name": "Waterside Buddist Shrine",
+      "location": "Guye District, Hebei Province, China",
+      "designer": "ARCHSTUDIO",
+      "year": "2016",
+      "image_count": 12
+    },
+    {
+      "folder": "mshl",
+      "cn_name": "陌上画廊",
+      "en_name": "Moshang Gallery",
+      "location": "Beijing",
+      "designer": "ZHIZHU Design studio",
+      "year": "2016",
+      "image_count": 7
+    }
+  ],
+  "室内 / Interior": [
+    {
+      "folder": "yrdn",
+      "cn_name": "宴慧餐厅设计",
+      "en_name": "Yanhui Restaurant Design",
+      "location": "Shenzhen",
+      "designer": "Liangzhu Design",
+      "year": "2019",
+      "image_count": 15
+    },
+    {
+      "folder": "hodn",
+      "cn_name": "杭州某办公室设计",
+      "en_name": "Hangzhou Office Design",
+      "location": "Hangzhou",
+      "designer": "Linping Chen",
+      "year": "2019",
+      "image_count": 20
+    },
+    {
+      "folder": "ghdn",
+      "cn_name": "广州家装设计",
+      "en_name": "Guangzhou Home Design",
+      "location": "Guangzhou",
+      "designer": "KINJO",
+      "year": "2019",
+      "image_count": 12
+    },
+    {
+      "folder": "trdn",
+      "cn_name": "花厨餐厅设计",
+      "en_name": "Tomacado Restaurant Design",
+      "location": "Beijing",
+      "designer": "Liangzhu Design",
+      "year": "2019",
+      "image_count": 20
+    },
+    {
+      "folder": "zjlp",
+      "cn_name": "北京乐平办公",
+      "en_name": "Leping Office",
+      "location": "Beijing",
+      "designer": "PAO STUDIO",
+      "year": "2018",
+      "image_count": 10
+    },
+    {
+      "folder": "mygnt",
+      "cn_name": "中央美院多功能厅改造",
+      "en_name": "Central Academy of Fine Arts Multifunction Room",
+      "location": "Beijing",
+      "designer": "ARCHSTUDIO",
+      "year": "2018",
+      "image_count": 14
+    },
+    {
+      "folder": "hzqs",
+      "cn_name": "杭州Knights办公室",
+      "en_name": "Knights Hangzhou Office",
+      "location": "Hangzhou",
+      "designer": "Howard/TEMP",
+      "year": "2017",
+      "image_count": 11
+    },
+    {
+      "folder": "hnsp1",
+      "cn_name": "沙坪建筑项目",
+      "en_name": "Shaping office",
+      "location": "Changsha, Hunan Province",
+      "designer": "Xiaoxin Liu",
+      "year": "2017",
+      "image_count": 10
+    },
+    {
+      "folder": "hnsp2",
+      "cn_name": "沙坪建筑项目",
+      "en_name": "Shaping office",
+      "location": "Changsha, Hunan Province",
+      "designer": "Xiaoxin Liu",
+      "year": "2017",
+      "image_count": 14
+    },
+    {
+      "folder": "mygz",
+      "cn_name": "中央美院14号楼公共空间改造",
+      "en_name": "Central Academy of Fine Arts Building #14",
+      "location": "Beijing",
+      "designer": "Yuyang",
+      "year": "2017",
+      "image_count": 6
+    },
+    {
+      "folder": "qdhdld",
+      "cn_name": "青岛海底捞金狮广场店",
+      "en_name": "Qingdao Haidilao Golden Lion Square Shop",
+      "location": "Qingdao , shandong province, China",
+      "designer": "Co-Direction Interior Design",
+      "year": "2017",
+      "image_count": 13
+    },
+    {
+      "folder": "lily",
+      "cn_name": "Lily Nails 美甲店系列",
+      "en_name": "Lily Nails Salon",
+      "location": "Beijing",
+      "designer": "ARCHSTUDIO",
+      "year": "2016",
+      "image_count": 13
+    }
+  ],
+  "景观 / Landscape": [
+    {
+      "folder": "ydyl",
+      "cn_name": "一带一路论坛灯光设计",
+      "en_name": "The Belt and Road Conference Lighting Design",
+      "location": "Beijing",
+      "designer": "Duyi",
+      "year": "2017",
+      "image_count": 6
+    },
+    {
+      "folder": "qhdbc",
+      "cn_name": "秦皇岛板城特色小镇",
+      "en_name": "Qin Huangdao Bancheng Town",
+      "location": "Qin Huangdao, Hebei Province",
+      "designer": "CHINA STATE CONSTRUCTION",
+      "year": "2017",
+      "image_count": 6
+    },
+    {
+      "folder": "bjlh",
+      "cn_name": "龙湖地产景粼原著",
+      "en_name": "Longhu Project",
+      "location": "Beijing",
+      "designer": null,
+      "year": "2017",
+      "image_count": 7
+    }
+  ],
+  "产品 / Product": [
+    {
+      "folder": "zjzz",
+      "cn_name": "纸桌与纸砖",
+      "en_name": "Paper Table and Paper Brick",
+      "location": "ARCHSTUDIO",
+      "designer": null,
+      "year": "2016",
+      "image_count": 7
+    }
+  ]
+}
