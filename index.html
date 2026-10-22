@@ -1,396 +1,1741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金伟琦 · Weiqi Jin — 建筑摄影</title>
+<meta name="description" content="金伟琦（Weiqi Jin），建筑摄影师。方向：建筑、室内、景观、产品摄影。北京 / 可出差。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0d;
+  --surface: #141414;
+  --surface-2: #1a1a1a;
+  --text: #f2f0ea;
+  --text-secondary: #8a8680;
+  --text-tertiary: #55524c;
+  --accent: #b89a72;
+  --border: #2a2a2a;
+  --font-serif: 'Noto Serif SC', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
 
-<!doctype html>
+/* ============ Nav ============ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  transition: background 0.35s ease, padding 0.35s ease, border-color 0.35s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 16px 48px;
+  border-bottom-color: var(--border);
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.nav-logo span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  transition: color 0.25s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-cta {
+  font-size: 13px !important;
+  letter-spacing: 0.08em;
+  color: var(--bg) !important;
+  background: var(--accent);
+  padding: 10px 22px;
+  transition: background 0.25s;
+}
+.nav-cta:hover { background: #cbb086; }
 
-<!--[if lt IE 7]><html lang="en-GB" prefix="og: http://ogp.me/ns#" class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html lang="en-GB" prefix="og: http://ogp.me/ns#" class="no-js lt-ie9 lt-ie8"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html lang="en-GB" prefix="og: http://ogp.me/ns#" class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en-GB" prefix="og: http://ogp.me/ns#" class="no-js"><!--<![endif]-->
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+}
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  animation: heroZoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes heroZoom { to { transform: scale(1); } }
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.25) 45%, rgba(13,13,13,0.35) 100%);
+}
+.hero-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0 48px 72px;
+  z-index: 2;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 1s 0.5s ease forwards;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 12vw, 160px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: fadeUp 1s 0.7s ease forwards;
+}
+.hero-sub {
+  margin-top: 24px;
+  font-size: 15px;
+  color: rgba(242,240,234,0.75);
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp 1s 0.95s ease forwards;
+}
+.hero-meta {
+  margin-top: 40px;
+  display: flex;
+  gap: 48px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  opacity: 0;
+  animation: fadeUp 1s 1.15s ease forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-	<head>
-		<meta charset="utf-8">
+/* ============ Sections ============ */
+.section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 120px 48px;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 64px;
+  gap: 32px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.section-title em {
+  font-style: normal;
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 360px;
+  text-align: right;
+}
 
-				<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta content="text/html; charset=UTF-8" name="Content-Type" />
-		<title>摄影|金伟琦</title>
+/* ============ Filter ============ */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 56px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 14px 20px;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.25s, border-color 0.25s;
+  white-space: nowrap;
+}
+.filter-btn:hover { color: var(--text); }
+.filter-btn.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.filter-btn .count {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-left: 6px;
+}
 
-		<meta name="HandheldFriendly" content="True">
-		<meta name="MobileOptimized" content="320">
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="apple-touch-icon" href="wp-content/themes/samuelbradley/build/images/apple-touch-icon.png">
-		<link rel="icon" href="wp-content/themes/samuelbradley/favicon.png">
-		<!--[if IE]>
-			<link rel="shortcut icon" href="wp-content/themes/samuelbradley/favicon.ico">
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<![endif]-->
-		
-		<meta name="msapplication-TileColor" content="#f01d4f">
-		<meta name="msapplication-TileImage" content="http://samuelbradley.com/wp-content/themes/samuelbradley/build/images/win8-tile-icon.png">
-        <meta name="theme-color" content="#121212">
-		<link rel="pingback" href="xmlrpc.php.html">
+/* ============ Project Grid ============ */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+.project {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--surface);
+}
+.project.span-8 { grid-column: span 8; }
+.project.span-7 { grid-column: span 7; }
+.project.span-6 { grid-column: span 6; }
+.project.span-5 { grid-column: span 5; }
+.project.span-4 { grid-column: span 4; }
+.project.span-12 { grid-column: span 12; }
+.project-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+}
+.project.span-12 .project-img-wrap { aspect-ratio: 21/9; }
+.project-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+.project:hover .project-img {
+  transform: scale(1.04);
+  filter: brightness(1.06);
+}
+.project-cat {
+  position: absolute;
+  top: 20px; left: 20px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text);
+  background: rgba(13,13,13,0.55);
+  backdrop-filter: blur(6px);
+  padding: 6px 14px;
+  z-index: 2;
+}
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 20px 4px 8px;
+  gap: 16px;
+}
+.project-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+}
+.project-title small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+.project-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+}
+.project.hidden { display: none; }
 
-				
-<!-- This site is optimized with the Yoast SEO plugin v4.4 - https://yoast.com/wordpress/plugins/seo/ -->
-<meta name="description" content="金伟琦建筑摄影"/>
-<meta name="keywords" content="金伟琦,建筑摄影,摄影"/>
-<link rel="canonical" href="index.html" />
-<link rel="alternate" type="application/rss+xml" title="Samuel Bradley &raquo; Feed" href="feed/index.html" />
-<link rel="alternate" type="application/rss+xml" title="Samuel Bradley &raquo; Comments Feed" href="comments/feed/index.html" />
-<link rel='stylesheet' id='allismachine-stylesheet-css'  href='wp-content/themes/samuelbradley/build/css/style.css' type='text/css' media='all' />
+/* reveal on scroll */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-		
-				<meta name="google-site-verification" content="ag909nEKG98as0v4YfnzsLjPMkOyjHK9PzklP8zWhhM">
-		
-		<!--SITE DESIGN AND BUILD BY A L L  I S  M A C H I N E . C O M -->
+/* ============ About ============ */
+.about {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-lede {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 400;
+  line-height: 1.5;
+}
+.about-body p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 20px;
+  max-width: 560px;
+}
+.about-facts {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 560px;
+}
+.fact {
+  background: var(--surface);
+  padding: 24px;
+}
+.fact dt {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+}
+.fact dd { font-size: 15px; color: var(--text); }
+.fact dd a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color 0.25s; }
+.fact dd a:hover { border-bottom-color: var(--accent); }
 
+/* ============ Inquiry ============ */
+.inquiry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+.inquiry-note {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+.inquiry-note strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 12px; font-size: 15px; }
+.inquiry-note ul { list-style: none; margin-top: 24px; }
+.inquiry-note li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  display: flex;
+  gap: 12px;
+}
+.inquiry-note li::before { content: '—'; color: var(--accent); }
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 24px;
+}
+.field { display: flex; flex-direction: column; gap: 10px; }
+.field.full { grid-column: 1 / -1; }
+.field label {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+}
+.field label .req { color: var(--accent); }
+.field input,
+.field select,
+.field textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 14px 16px;
+  transition: border-color 0.25s;
+  width: 100%;
+}
+.field textarea { resize: vertical; min-height: 96px; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238a8680' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+.radios { display: flex; gap: 12px; }
+.radio-pill {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 13px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.radio-pill input { display: none; }
+.radio-pill.selected { border-color: var(--accent); color: var(--text); background: rgba(184,154,114,0.08); }
+.form-submit {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.form-submit .hint { font-size: 12px; color: var(--text-tertiary); max-width: 340px; }
+.btn-submit {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  padding: 16px 48px;
+  transition: background 0.25s;
+}
+.btn-submit:hover { background: #cbb086; }
+.form-success {
+  grid-column: 1 / -1;
+  border: 1px solid var(--accent);
+  padding: 24px;
+  font-size: 14px;
+  color: var(--text);
+  display: none;
+}
+.form-success.show { display: block; }
 
-<!--百度统计代码-->
+/* ============ Footer ============ */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-name { font-family: var(--font-serif); font-size: 18px; letter-spacing: 0.1em; }
+.footer-links { display: flex; gap: 28px; font-size: 13px; color: var(--text-secondary); }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 12px; color: var(--text-tertiary); width: 100%; }
+
+/* ============ Lightbox ============ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10,10,10,0.97);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.lightbox.open { display: flex; }
+.lightbox.visible { opacity: 1; }
+.lb-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 0;
+  padding: 80px 24px;
+}
+.lb-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  transition: opacity 0.3s ease;
+}
+.lb-img.fading { opacity: 0; }
+.lb-counter {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  color: var(--text-secondary);
+}
+.lb-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 52px; height: 52px;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+  z-index: 3;
+}
+.lb-arrow:hover { border-color: var(--accent); color: var(--accent); }
+.lb-prev { left: 32px; }
+.lb-next { right: 32px; }
+.lb-side {
+  width: 380px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  padding: 48px 40px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.lb-close {
+  position: absolute;
+  top: 28px; right: 32px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 28px;
+  line-height: 1;
+  transition: color 0.25s;
+  z-index: 3;
+}
+.lb-close:hover { color: var(--text); }
+.lb-cat {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.lb-title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.lb-subtitle {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.lb-meta {
+  margin: 28px 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.lb-meta div span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+}
+.lb-meta div b { font-size: 13px; font-weight: 500; }
+.lb-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.lb-thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 32px;
+}
+.lb-thumb {
+  width: 64px; height: 44px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.45;
+  border: 1px solid transparent;
+  transition: all 0.25s;
+}
+.lb-thumb:hover { opacity: 0.8; }
+.lb-thumb.active { opacity: 1; border-color: var(--accent); }
+
+/* ============ Responsive ============ */
+@media (max-width: 1080px) {
+  .projects .project { grid-column: span 12 !important; }
+  .project.span-12 .project-img-wrap, .project-img-wrap { aspect-ratio: 16/10; }
+  .about-grid, .inquiry-grid { grid-template-columns: 1fr; gap: 48px; }
+  .section-desc { text-align: left; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .lb-side { display: none; }
+  .lb-mobile-info {
+    display: block;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px 24px 88px;
+    background: linear-gradient(to top, rgba(10,10,10,0.95), transparent);
+    pointer-events: none;
+  }
+}
+.lb-mobile-info { display: none; }
+.lb-mobile-info .lb-title { font-size: 20px; }
+.lb-mobile-info .lb-desc { font-size: 13px; margin-top: 8px; }
+@media (max-width: 720px) {
+  .nav { padding: 16px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
+  .nav-links { gap: 20px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .hero-content { padding: 0 24px 56px; }
+  .hero-meta { gap: 24px; flex-wrap: wrap; }
+  .section { padding: 80px 24px; }
+  .form { grid-template-columns: 1fr; }
+  .about-facts { grid-template-columns: 1fr; }
+  .footer { padding: 32px 24px; }
+  .lb-arrow { width: 44px; height: 44px; }
+  .lb-prev { left: 12px; }
+  .lb-next { right: 12px; }
+  .lb-close { top: 16px; right: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#top">金伟琦<span>WEIQI JIN</span></a>
+  <div class="nav-links">
+    <a href="#works">作品</a>
+    <a href="#about">关于</a>
+    <a href="#inquiry" class="nav-cta">商业询价</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img class="hero-img" src="assets/projects/anhi/1.jpg" alt="安之若宿·山 — 云南腾冲和顺古镇">
+  <div class="hero-content">
+    <p class="hero-eyebrow">ARCHITECTURE · CITY · INTERIOR</p>
+    <h1 class="hero-title">金伟琦</h1>
+    <p class="hero-sub">建筑摄影师。基于对空间的忠诚表达，辅以一定的视觉修饰，做一次特定场所下的二次设计。</p>
+    <div class="hero-meta"><span>北京 / 可出差</span><span>建筑 · 室内 · 景观 · 产品</span><a href="#works" style="color: var(--accent);">浏览作品 ↓</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="works">
+  <div class="section-head reveal">
+    <h2 class="section-title"><em>SELECTED WORKS</em>作品</h2>
+    <p class="section-desc">四个拍摄方向共 40 个项目——建筑外立面的尺度与材质、室内空间的光线与叙事、景观的场所感、以及产品与空间的关系。</p>
+  </div>
+  <div class="filter-bar reveal" id="filterBar">
+    <button class="filter-btn active" data-filter="all">全部<span class="count">40</span></button>
+    <button class="filter-btn" data-filter="architecture">建筑<span class="count">24</span></button>
+    <button class="filter-btn" data-filter="interior">室内<span class="count">12</span></button>
+    <button class="filter-btn" data-filter="landscape">景观<span class="count">03</span></button>
+    <button class="filter-btn" data-filter="product">产品<span class="count">01</span></button>
+  </div>
+  <div class="projects" id="projects"></div>
+</section>
+
+<section class="about" id="about">
+  <div class="section">
+    <div class="about-grid">
+      <div class="reveal">
+        <h2 class="section-title"><em>ABOUT</em>关于</h2>
+        <p class="about-lede" style="margin-top: 32px;">建筑摄影不再是单纯的摄影创作——它是在特定场所进行的一次二次设计。</p>
+      </div>
+      <div class="about-body reveal">
+        <p>金伟琦，建筑摄影师，常驻北京。业务方向覆盖建筑、室内、景观与产品摄影。</p>
+        <p>空间表达的准确性是根本——为没有到过实地的人做真实记录，为设计师全方位呈现方案。天气、光线、人的行为都是画面设计中的重要元素。一个好的画面会带动观者的情绪，为设计的最终呈现起到画龙点睛的作用。</p>
+        <dl class="about-facts">
+          <div class="fact"><dt>常驻</dt><dd>北京</dd></div>
+          <div class="fact"><dt>方向</dt><dd>建筑 · 室内 · 景观 · 产品</dd></div>
+          <div class="fact"><dt>工作邮箱</dt><dd><a href="mailto:a20j@qq.com">a20j@qq.com</a></dd></div>
+          <div class="fact"><dt>合作方式</dt><dd>请先提交商业询价</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="inquiry">
+  <div class="inquiry-grid">
+    <div class="reveal">
+      <h2 class="section-title"><em>COMMISSION</em>商业询价</h2>
+      <div class="inquiry-note" style="margin-top: 32px;">
+        <strong>以下信息有助于我在首轮回复中给出更准确的报价。</strong>确认项目需求后 2 个工作日内通过邮件回复；确认合作意向后提供微信进一步沟通。
+        <ul>
+          <li>建筑外立面与室内空间可分开报价</li>
+          <li>雨季 / 特殊天气窗口需提前沟通排期</li>
+          <li>未经授权的改造项目不对外发布</li>
+        </ul>
+      </div>
+    </div>
+    <form class="form reveal" id="inquiryForm" novalidate>
+      <div class="field">
+        <label for="f-city">项目城市与地址 <span class="req">*</span></label>
+        <input id="f-city" name="city" type="text" placeholder="例：上海市徐汇区武康路 ×× 号" required>
+      </div>
+      <div class="field">
+        <label for="f-type">建筑 / 室内类型及面积 <span class="req">*</span></label>
+        <input id="f-type" name="type" type="text" placeholder="例：历史公寓外立面，约 1200㎡" required>
+      </div>
+      <div class="field">
+        <label for="f-time">期望拍摄时间 / 天气窗口 <span class="req">*</span></label>
+        <input id="f-time" name="time" type="text" placeholder="例：11 月中旬，希望有清晨或雨后" required>
+      </div>
+      <div class="field">
+        <label for="f-deliver">交付张数 / 视频需求 <span class="req">*</span></label>
+        <input id="f-deliver" name="deliver" type="text" placeholder="例：精修 30 张，含 1 支 60s 短视频" required>
+      </div>
+      <div class="field full">
+        <label for="f-usage">版权用途 <span class="req">*</span></label>
+        <select id="f-usage" name="usage" required>
+          <option value="">请选择主要用途</option>
+          <option>品牌宣传 / 官网与社交媒体</option>
+          <option>出版物 / 媒体报道</option>
+          <option>投标与竞赛文本</option>
+          <option>展览 / 线下物料</option>
+          <option>买断 / 多用途组合</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>是否需要建筑清场与人员协调 <span class="req">*</span></label>
+        <div class="radios" id="clearanceRadios">
+          <label class="radio-pill selected"><input type="radio" name="clearance" value="不需要" checked>不需要</label>
+          <label class="radio-pill"><input type="radio" name="clearance" value="需要，需协助协调">需要，需协助协调</label>
+          <label class="radio-pill"><input type="radio" name="clearance" value="待沟通">待沟通</label>
+        </div>
+      </div>
+      <div class="field full">
+        <label for="f-contact">联系邮箱 <span class="req">*</span></label>
+        <input id="f-contact" name="contact" type="email" placeholder="用于接收报价回复" required>
+      </div>
+      <div class="field full">
+        <label for="f-note">补充说明</label>
+        <textarea id="f-note" name="note" placeholder="其他想说明的情况，例如建筑现状、发布时间要求等"></textarea>
+      </div>
+      <div class="form-submit">
+        <p class="hint">提交即表示同意通过 a20j@qq.com 接收报价与排期沟通。本站不展示固定价目表。</p>
+        <button type="submit" class="btn-submit">提交询价</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        已收到询价信息。请将以上内容同步发送至 <b>a20j@qq.com</b> 作为正式留档，我会在 2 个工作日内回复。
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-name">金伟琦</div>
+  <div class="footer-links">
+    <a href="#works">作品</a>
+    <a href="#about">关于</a>
+    <a href="mailto:a20j@qq.com">a20j@qq.com</a>
+  </div>
+  <p class="footer-copy">© 2016–2019 金伟琦建筑摄影。本站图片未经授权请勿使用。</p>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品大图浏览">
+  <button class="lb-close" id="lbClose" aria-label="关闭">×</button>
+  <div class="lb-main">
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="上一张">←</button>
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="下一张">→</button>
+    <div class="lb-counter" id="lbCounter"></div>
+    <div class="lb-mobile-info" id="lbMobileInfo"></div>
+  </div>
+  <aside class="lb-side">
+    <p class="lb-cat" id="lbCat"></p>
+    <h3 class="lb-title" id="lbTitle"></h3>
+    <p class="lb-subtitle" id="lbSubtitle"></p>
+    <div class="lb-meta" id="lbMeta"></div>
+    <p class="lb-desc" id="lbDesc"></p>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </aside>
+</div>
+
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b658c9ae44e75d6a8c36b118646ac755";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+// PROJECTS 数据已替换为真实项目（见 backup-site-info.md）
+
+const PROJECTS = [
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 8,
+    title: "安之若宿·山", subtitle: "ANNSO HILL",
+    date: "2019", location: "Tengchong ,Yunnan province", type: "设计：STUDIO QI",
+    desc: "建筑类拍摄项目，地点 Tengchong ,Yunnan province，由 STUDIO QI 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/anhi/1.jpg", caption: "封面 — Tengchong ,Yunnan province" },
+      { src: "assets/projects/anhi/10.jpg", caption: "图 2 / 20" },
+      { src: "assets/projects/anhi/11.jpg", caption: "图 3 / 20" },
+      { src: "assets/projects/anhi/12.jpg", caption: "图 4 / 20" },
+      { src: "assets/projects/anhi/13.jpg", caption: "图 5 / 20" },
+      { src: "assets/projects/anhi/14.jpg", caption: "图 6 / 20" },
+      { src: "assets/projects/anhi/15.jpg", caption: "图 7 / 20" },
+      { src: "assets/projects/anhi/16.jpg", caption: "图 8 / 20" },
+      { src: "assets/projects/anhi/17.jpg", caption: "图 9 / 20" },
+      { src: "assets/projects/anhi/18.jpg", caption: "图 10 / 20" },
+      { src: "assets/projects/anhi/19.jpg", caption: "图 11 / 20" },
+      { src: "assets/projects/anhi/2.jpg", caption: "图 12 / 20" },
+      { src: "assets/projects/anhi/20.jpg", caption: "图 13 / 20" },
+      { src: "assets/projects/anhi/3.jpg", caption: "图 14 / 20" },
+      { src: "assets/projects/anhi/4.jpg", caption: "图 15 / 20" },
+      { src: "assets/projects/anhi/5.jpg", caption: "图 16 / 20" },
+      { src: "assets/projects/anhi/6.jpg", caption: "图 17 / 20" },
+      { src: "assets/projects/anhi/7.jpg", caption: "图 18 / 20" },
+      { src: "assets/projects/anhi/8.jpg", caption: "图 19 / 20" },
+      { src: "assets/projects/anhi/9.jpg", caption: "图 20 / 20" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 4,
+    title: "可变办公空间", subtitle: "Variable office space",
+    date: "2019", location: "Beijing", type: "设计：LUO Studio",
+    desc: "建筑类拍摄项目，地点 Beijing，由 LUO Studio 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/vose/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/vose/10.jpg", caption: "图 2 / 10" },
+      { src: "assets/projects/vose/2.jpg", caption: "图 3 / 10" },
+      { src: "assets/projects/vose/3.jpg", caption: "图 4 / 10" },
+      { src: "assets/projects/vose/4.jpg", caption: "图 5 / 10" },
+      { src: "assets/projects/vose/5.jpg", caption: "图 6 / 10" },
+      { src: "assets/projects/vose/6.jpg", caption: "图 7 / 10" },
+      { src: "assets/projects/vose/7.jpg", caption: "图 8 / 10" },
+      { src: "assets/projects/vose/8.jpg", caption: "图 9 / 10" },
+      { src: "assets/projects/vose/9.jpg", caption: "图 10 / 10" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 7,
+    title: "胜利市场临时安置点", subtitle: "Temporary Site of Shengli Market",
+    date: "2019", location: "Puyang City, Henan Province", type: "设计：LUO Studio",
+    desc: "建筑类拍摄项目，地点 Puyang City, Henan Province，由 LUO Studio 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/tsms/1.jpg", caption: "封面 — Puyang City, Henan Province" },
+      { src: "assets/projects/tsms/10.jpg", caption: "图 2 / 13" },
+      { src: "assets/projects/tsms/11.jpg", caption: "图 3 / 13" },
+      { src: "assets/projects/tsms/12.jpg", caption: "图 4 / 13" },
+      { src: "assets/projects/tsms/13.jpg", caption: "图 5 / 13" },
+      { src: "assets/projects/tsms/2.jpg", caption: "图 6 / 13" },
+      { src: "assets/projects/tsms/3.jpg", caption: "图 7 / 13" },
+      { src: "assets/projects/tsms/4.jpg", caption: "图 8 / 13" },
+      { src: "assets/projects/tsms/5.jpg", caption: "图 9 / 13" },
+      { src: "assets/projects/tsms/6.jpg", caption: "图 10 / 13" },
+      { src: "assets/projects/tsms/7.jpg", caption: "图 11 / 13" },
+      { src: "assets/projects/tsms/8.jpg", caption: "图 12 / 13" },
+      { src: "assets/projects/tsms/9.jpg", caption: "图 13 / 13" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 5,
+    title: "自在平江野奢酒店", subtitle: "Pingjiang Homey Wild Luxury Hotel",
+    date: "2019", location: "Baimao Village, Pingjiang County, Hunan Province", type: "设计：Beijing Duoxiangjie Architectural Design Co., Ltd",
+    desc: "建筑类拍摄项目，地点 Baimao Village, Pingjiang County, Hunan Province，由 Beijing Duoxiangjie Architectural Design Co., Ltd 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/phwh/1.jpg", caption: "封面 — Baimao Village, Pingjiang County, Hunan Province" },
+      { src: "assets/projects/phwh/10.jpg", caption: "图 2 / 19" },
+      { src: "assets/projects/phwh/11.jpg", caption: "图 3 / 19" },
+      { src: "assets/projects/phwh/12.jpg", caption: "图 4 / 19" },
+      { src: "assets/projects/phwh/13.jpg", caption: "图 5 / 19" },
+      { src: "assets/projects/phwh/14.jpg", caption: "图 6 / 19" },
+      { src: "assets/projects/phwh/15.jpg", caption: "图 7 / 19" },
+      { src: "assets/projects/phwh/16.jpg", caption: "图 8 / 19" },
+      { src: "assets/projects/phwh/17.jpg", caption: "图 9 / 19" },
+      { src: "assets/projects/phwh/18.jpg", caption: "图 10 / 19" },
+      { src: "assets/projects/phwh/19.jpg", caption: "图 11 / 19" },
+      { src: "assets/projects/phwh/2.jpg", caption: "图 12 / 19" },
+      { src: "assets/projects/phwh/3.jpg", caption: "图 13 / 19" },
+      { src: "assets/projects/phwh/4.jpg", caption: "图 14 / 19" },
+      { src: "assets/projects/phwh/5.jpg", caption: "图 15 / 19" },
+      { src: "assets/projects/phwh/6.jpg", caption: "图 16 / 19" },
+      { src: "assets/projects/phwh/7.jpg", caption: "图 17 / 19" },
+      { src: "assets/projects/phwh/8.jpg", caption: "图 18 / 19" },
+      { src: "assets/projects/phwh/9.jpg", caption: "图 19 / 19" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 6,
+    title: "陵川书屋", subtitle: "Bookstore of Lingchuan",
+    date: "2019", location: "hanxi", type: "设计：LUO Studio",
+    desc: "建筑类拍摄项目，地点 hanxi，由 LUO Studio 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/bolc/1.jpg", caption: "封面 — hanxi" },
+      { src: "assets/projects/bolc/10.jpg", caption: "图 2 / 11" },
+      { src: "assets/projects/bolc/11.jpg", caption: "图 3 / 11" },
+      { src: "assets/projects/bolc/2.jpg", caption: "图 4 / 11" },
+      { src: "assets/projects/bolc/3.jpg", caption: "图 5 / 11" },
+      { src: "assets/projects/bolc/4.jpg", caption: "图 6 / 11" },
+      { src: "assets/projects/bolc/5.jpg", caption: "图 7 / 11" },
+      { src: "assets/projects/bolc/6.jpg", caption: "图 8 / 11" },
+      { src: "assets/projects/bolc/7.jpg", caption: "图 9 / 11" },
+      { src: "assets/projects/bolc/8.jpg", caption: "图 10 / 11" },
+      { src: "assets/projects/bolc/9.jpg", caption: "图 11 / 11" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 8,
+    title: "克拉玛依科技博物馆", subtitle: "Karamay Science Museums",
+    date: "2019", location: "Karamay", type: "设计：BIAD",
+    desc: "建筑类拍摄项目，地点 Karamay，由 BIAD 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ksms/1.jpg", caption: "封面 — Karamay" },
+      { src: "assets/projects/ksms/10.jpg", caption: "图 2 / 15" },
+      { src: "assets/projects/ksms/11.jpg", caption: "图 3 / 15" },
+      { src: "assets/projects/ksms/12.jpg", caption: "图 4 / 15" },
+      { src: "assets/projects/ksms/13.jpg", caption: "图 5 / 15" },
+      { src: "assets/projects/ksms/14.jpg", caption: "图 6 / 15" },
+      { src: "assets/projects/ksms/15.jpg", caption: "图 7 / 15" },
+      { src: "assets/projects/ksms/2.jpg", caption: "图 8 / 15" },
+      { src: "assets/projects/ksms/3.jpg", caption: "图 9 / 15" },
+      { src: "assets/projects/ksms/4.jpg", caption: "图 10 / 15" },
+      { src: "assets/projects/ksms/5.jpg", caption: "图 11 / 15" },
+      { src: "assets/projects/ksms/6.jpg", caption: "图 12 / 15" },
+      { src: "assets/projects/ksms/7.jpg", caption: "图 13 / 15" },
+      { src: "assets/projects/ksms/8.jpg", caption: "图 14 / 15" },
+      { src: "assets/projects/ksms/9.jpg", caption: "图 15 / 15" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 4,
+    title: "局里民宿设计", subtitle: "Juli Guesthouse Design",
+    date: "2019", location: "Beijing", type: "设计：BIAD",
+    desc: "建筑类拍摄项目，地点 Beijing，由 BIAD 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/jged/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/jged/10.jpg", caption: "图 2 / 10" },
+      { src: "assets/projects/jged/2.jpg", caption: "图 3 / 10" },
+      { src: "assets/projects/jged/3.jpg", caption: "图 4 / 10" },
+      { src: "assets/projects/jged/4.jpg", caption: "图 5 / 10" },
+      { src: "assets/projects/jged/5.jpg", caption: "图 6 / 10" },
+      { src: "assets/projects/jged/6.jpg", caption: "图 7 / 10" },
+      { src: "assets/projects/jged/7.jpg", caption: "图 8 / 10" },
+      { src: "assets/projects/jged/8.jpg", caption: "图 9 / 10" },
+      { src: "assets/projects/jged/9.jpg", caption: "图 10 / 10" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 7,
+    title: "韩国住宅设计", subtitle: "Korea Home Design",
+    date: "2019", location: "Seoul", type: "设计：JULY Architecture",
+    desc: "建筑类拍摄项目，地点 Seoul，由 JULY Architecture 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/kahd/1.jpg", caption: "封面 — Seoul" },
+      { src: "assets/projects/kahd/10.jpg", caption: "图 2 / 13" },
+      { src: "assets/projects/kahd/11.jpg", caption: "图 3 / 13" },
+      { src: "assets/projects/kahd/12.jpg", caption: "图 4 / 13" },
+      { src: "assets/projects/kahd/13.jpg", caption: "图 5 / 13" },
+      { src: "assets/projects/kahd/2.jpg", caption: "图 6 / 13" },
+      { src: "assets/projects/kahd/3.jpg", caption: "图 7 / 13" },
+      { src: "assets/projects/kahd/4.jpg", caption: "图 8 / 13" },
+      { src: "assets/projects/kahd/5.jpg", caption: "图 9 / 13" },
+      { src: "assets/projects/kahd/6.jpg", caption: "图 10 / 13" },
+      { src: "assets/projects/kahd/7.jpg", caption: "图 11 / 13" },
+      { src: "assets/projects/kahd/8.jpg", caption: "图 12 / 13" },
+      { src: "assets/projects/kahd/9.jpg", caption: "图 13 / 13" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 5,
+    title: "种子影院", subtitle: "Seeds Cinema",
+    date: "2019", location: "Fenyang Shanxi", type: "设计：Shimu Wang",
+    desc: "建筑类拍摄项目，地点 Fenyang Shanxi，由 Shimu Wang 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ssca/1.jpg", caption: "封面 — Fenyang Shanxi" },
+      { src: "assets/projects/ssca/2.jpg", caption: "图 2 / 9" },
+      { src: "assets/projects/ssca/3.jpg", caption: "图 3 / 9" },
+      { src: "assets/projects/ssca/4.jpg", caption: "图 4 / 9" },
+      { src: "assets/projects/ssca/5.jpg", caption: "图 5 / 9" },
+      { src: "assets/projects/ssca/6.jpg", caption: "图 6 / 9" },
+      { src: "assets/projects/ssca/7.jpg", caption: "图 7 / 9" },
+      { src: "assets/projects/ssca/8.jpg", caption: "图 8 / 9" },
+      { src: "assets/projects/ssca/9.jpg", caption: "图 9 / 9" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 6,
+    title: "大小咖啡北锣鼓巷店", subtitle: "BigSmall Coffee Beiluoguxiang",
+    date: "2019", location: "Beijing", type: "设计：RESERVE",
+    desc: "建筑类拍摄项目，地点 Beijing，由 RESERVE 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/bcbg/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/bcbg/2.jpg", caption: "图 2 / 8" },
+      { src: "assets/projects/bcbg/3.jpg", caption: "图 3 / 8" },
+      { src: "assets/projects/bcbg/4.jpg", caption: "图 4 / 8" },
+      { src: "assets/projects/bcbg/5.jpg", caption: "图 5 / 8" },
+      { src: "assets/projects/bcbg/6.jpg", caption: "图 6 / 8" },
+      { src: "assets/projects/bcbg/7.jpg", caption: "图 7 / 8" },
+      { src: "assets/projects/bcbg/8.jpg", caption: "图 8 / 8" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 8,
+    title: "爱马思艺术中心", subtitle: "IOMA",
+    date: "2019", location: "Beijing", type: "设计：ARCHSTUDIO",
+    desc: "建筑类拍摄项目，地点 Beijing，由 ARCHSTUDIO 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ioma/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/ioma/10.jpg", caption: "图 2 / 10" },
+      { src: "assets/projects/ioma/2.jpg", caption: "图 3 / 10" },
+      { src: "assets/projects/ioma/3.jpg", caption: "图 4 / 10" },
+      { src: "assets/projects/ioma/4.jpg", caption: "图 5 / 10" },
+      { src: "assets/projects/ioma/5.jpg", caption: "图 6 / 10" },
+      { src: "assets/projects/ioma/6.jpg", caption: "图 7 / 10" },
+      { src: "assets/projects/ioma/7.jpg", caption: "图 8 / 10" },
+      { src: "assets/projects/ioma/8.jpg", caption: "图 9 / 10" },
+      { src: "assets/projects/ioma/9.jpg", caption: "图 10 / 10" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 4,
+    title: "叠院儿", subtitle: "Layering Courtyard",
+    date: "2018", location: "Qianmen, Beijing, China", type: "设计：ARCHSTUDIO",
+    desc: "建筑类拍摄项目，地点 Qianmen, Beijing, China，由 ARCHSTUDIO 设计，完成于 2018。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/bjdy/1.jpg", caption: "封面 — Qianmen, Beijing, China" },
+      { src: "assets/projects/bjdy/10.jpg", caption: "图 2 / 15" },
+      { src: "assets/projects/bjdy/11.jpg", caption: "图 3 / 15" },
+      { src: "assets/projects/bjdy/12.jpg", caption: "图 4 / 15" },
+      { src: "assets/projects/bjdy/13.jpg", caption: "图 5 / 15" },
+      { src: "assets/projects/bjdy/14.jpg", caption: "图 6 / 15" },
+      { src: "assets/projects/bjdy/15.jpg", caption: "图 7 / 15" },
+      { src: "assets/projects/bjdy/2.jpg", caption: "图 8 / 15" },
+      { src: "assets/projects/bjdy/3.jpg", caption: "图 9 / 15" },
+      { src: "assets/projects/bjdy/4.jpg", caption: "图 10 / 15" },
+      { src: "assets/projects/bjdy/5.jpg", caption: "图 11 / 15" },
+      { src: "assets/projects/bjdy/6.jpg", caption: "图 12 / 15" },
+      { src: "assets/projects/bjdy/7.jpg", caption: "图 13 / 15" },
+      { src: "assets/projects/bjdy/8.jpg", caption: "图 14 / 15" },
+      { src: "assets/projects/bjdy/9.jpg", caption: "图 15 / 15" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 7,
+    title: "别苑", subtitle: "Bie Yard",
+    date: "2018", location: "Xin County, Henan Province", type: "设计：3andwich Design",
+    desc: "建筑类拍摄项目，地点 Xin County, Henan Province，由 3andwich Design 设计，完成于 2018。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/dsby/1.jpg", caption: "封面 — Xin County, Henan Province" },
+      { src: "assets/projects/dsby/10.jpg", caption: "图 2 / 13" },
+      { src: "assets/projects/dsby/11.jpg", caption: "图 3 / 13" },
+      { src: "assets/projects/dsby/12.jpg", caption: "图 4 / 13" },
+      { src: "assets/projects/dsby/13.jpg", caption: "图 5 / 13" },
+      { src: "assets/projects/dsby/2.jpg", caption: "图 6 / 13" },
+      { src: "assets/projects/dsby/3.jpg", caption: "图 7 / 13" },
+      { src: "assets/projects/dsby/4.jpg", caption: "图 8 / 13" },
+      { src: "assets/projects/dsby/5.jpg", caption: "图 9 / 13" },
+      { src: "assets/projects/dsby/6.jpg", caption: "图 10 / 13" },
+      { src: "assets/projects/dsby/7.jpg", caption: "图 11 / 13" },
+      { src: "assets/projects/dsby/8.jpg", caption: "图 12 / 13" },
+      { src: "assets/projects/dsby/9.jpg", caption: "图 13 / 13" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 5,
+    title: "吉姆餐厅（大理店）", subtitle: "Mom restaurant",
+    date: "2018", location: "Dali city,Yunnan province", type: "设计：AML Design studio",
+    desc: "建筑类拍摄项目，地点 Dali city,Yunnan province，由 AML Design studio 设计，完成于 2018。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/dljm/1.jpg", caption: "封面 — Dali city,Yunnan province" },
+      { src: "assets/projects/dljm/10.jpg", caption: "图 2 / 11" },
+      { src: "assets/projects/dljm/11.jpg", caption: "图 3 / 11" },
+      { src: "assets/projects/dljm/2.jpg", caption: "图 4 / 11" },
+      { src: "assets/projects/dljm/3.jpg", caption: "图 5 / 11" },
+      { src: "assets/projects/dljm/4.jpg", caption: "图 6 / 11" },
+      { src: "assets/projects/dljm/5.jpg", caption: "图 7 / 11" },
+      { src: "assets/projects/dljm/6.jpg", caption: "图 8 / 11" },
+      { src: "assets/projects/dljm/7.jpg", caption: "图 9 / 11" },
+      { src: "assets/projects/dljm/8.jpg", caption: "图 10 / 11" },
+      { src: "assets/projects/dljm/9.jpg", caption: "图 11 / 11" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 8,
+    title: "楼顶竹林间", subtitle: "Bamboo Forest on the Roof",
+    date: "2017", location: "Beijing", type: "设计：V STUDIO",
+    desc: "建筑类拍摄项目，地点 Beijing，由 V STUDIO 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ldzl/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/ldzl/10.jpg", caption: "图 2 / 15" },
+      { src: "assets/projects/ldzl/11.jpg", caption: "图 3 / 15" },
+      { src: "assets/projects/ldzl/12.jpg", caption: "图 4 / 15" },
+      { src: "assets/projects/ldzl/13.jpg", caption: "图 5 / 15" },
+      { src: "assets/projects/ldzl/14.jpg", caption: "图 6 / 15" },
+      { src: "assets/projects/ldzl/15.jpg", caption: "图 7 / 15" },
+      { src: "assets/projects/ldzl/2.jpg", caption: "图 8 / 15" },
+      { src: "assets/projects/ldzl/3.jpg", caption: "图 9 / 15" },
+      { src: "assets/projects/ldzl/4.jpg", caption: "图 10 / 15" },
+      { src: "assets/projects/ldzl/5.jpg", caption: "图 11 / 15" },
+      { src: "assets/projects/ldzl/6.jpg", caption: "图 12 / 15" },
+      { src: "assets/projects/ldzl/7.jpg", caption: "图 13 / 15" },
+      { src: "assets/projects/ldzl/8.jpg", caption: "图 14 / 15" },
+      { src: "assets/projects/ldzl/9.jpg", caption: "图 15 / 15" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 4,
+    title: "扭院儿", subtitle: "Twisting Courtyard",
+    date: "2017", location: "Qianmen, Beijing, China", type: "设计：ARCHSTUDIO",
+    desc: "建筑类拍摄项目，地点 Qianmen, Beijing, China，由 ARCHSTUDIO 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/bjny/1.jpg", caption: "封面 — Qianmen, Beijing, China" },
+      { src: "assets/projects/bjny/2.jpg", caption: "图 2 / 6" },
+      { src: "assets/projects/bjny/3.jpg", caption: "图 3 / 6" },
+      { src: "assets/projects/bjny/4.jpg", caption: "图 4 / 6" },
+      { src: "assets/projects/bjny/5.jpg", caption: "图 5 / 6" },
+      { src: "assets/projects/bjny/6.jpg", caption: "图 6 / 6" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 7,
+    title: "安龙游客服务中心", subtitle: "Tourist Center of Anlong Limestone Resort",
+    date: "2017", location: "Dushan Town,Guizhou Province", type: "设计：3andwich Design",
+    desc: "建筑类拍摄项目，地点 Dushan Town,Guizhou Province，由 3andwich Design 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ykzx/1.jpg", caption: "封面 — Dushan Town,Guizhou Province" },
+      { src: "assets/projects/ykzx/10.jpg", caption: "图 2 / 16" },
+      { src: "assets/projects/ykzx/11.jpg", caption: "图 3 / 16" },
+      { src: "assets/projects/ykzx/12.jpg", caption: "图 4 / 16" },
+      { src: "assets/projects/ykzx/13.jpg", caption: "图 5 / 16" },
+      { src: "assets/projects/ykzx/14.jpg", caption: "图 6 / 16" },
+      { src: "assets/projects/ykzx/15.jpg", caption: "图 7 / 16" },
+      { src: "assets/projects/ykzx/16.jpg", caption: "图 8 / 16" },
+      { src: "assets/projects/ykzx/2.jpg", caption: "图 9 / 16" },
+      { src: "assets/projects/ykzx/3.jpg", caption: "图 10 / 16" },
+      { src: "assets/projects/ykzx/4.jpg", caption: "图 11 / 16" },
+      { src: "assets/projects/ykzx/5.jpg", caption: "图 12 / 16" },
+      { src: "assets/projects/ykzx/6.jpg", caption: "图 13 / 16" },
+      { src: "assets/projects/ykzx/7.jpg", caption: "图 14 / 16" },
+      { src: "assets/projects/ykzx/8.jpg", caption: "图 15 / 16" },
+      { src: "assets/projects/ykzx/9.jpg", caption: "图 16 / 16" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 5,
+    title: "溶岩美术馆", subtitle: "Limestone Gallery",
+    date: "2017", location: "Dushan Town,Guizhou Province", type: "设计：3andwich Design",
+    desc: "建筑类拍摄项目，地点 Dushan Town,Guizhou Province，由 3andwich Design 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/sdms/1.jpg", caption: "封面 — Dushan Town,Guizhou Province" },
+      { src: "assets/projects/sdms/10.jpg", caption: "图 2 / 14" },
+      { src: "assets/projects/sdms/11.jpg", caption: "图 3 / 14" },
+      { src: "assets/projects/sdms/12.jpg", caption: "图 4 / 14" },
+      { src: "assets/projects/sdms/13.jpg", caption: "图 5 / 14" },
+      { src: "assets/projects/sdms/14.jpg", caption: "图 6 / 14" },
+      { src: "assets/projects/sdms/2.jpg", caption: "图 7 / 14" },
+      { src: "assets/projects/sdms/3.jpg", caption: "图 8 / 14" },
+      { src: "assets/projects/sdms/4.jpg", caption: "图 9 / 14" },
+      { src: "assets/projects/sdms/5.jpg", caption: "图 10 / 14" },
+      { src: "assets/projects/sdms/6.jpg", caption: "图 11 / 14" },
+      { src: "assets/projects/sdms/7.jpg", caption: "图 12 / 14" },
+      { src: "assets/projects/sdms/8.jpg", caption: "图 13 / 14" },
+      { src: "assets/projects/sdms/9.jpg", caption: "图 14 / 14" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 6,
+    title: "上坪古村复兴计划之水口篇", subtitle: "Shangping Village Regeneration – Shuikou Area",
+    date: "2017", location: "Xiyuan Town, Fujian Province", type: "设计：3andwich Design",
+    desc: "建筑类拍摄项目，地点 Xiyuan Town, Fujian Province，由 3andwich Design 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/fjsp/1.jpg", caption: "封面 — Xiyuan Town, Fujian Province" },
+      { src: "assets/projects/fjsp/10.jpg", caption: "图 2 / 11" },
+      { src: "assets/projects/fjsp/11.jpg", caption: "图 3 / 11" },
+      { src: "assets/projects/fjsp/2.jpg", caption: "图 4 / 11" },
+      { src: "assets/projects/fjsp/3.jpg", caption: "图 5 / 11" },
+      { src: "assets/projects/fjsp/4.jpg", caption: "图 6 / 11" },
+      { src: "assets/projects/fjsp/5.jpg", caption: "图 7 / 11" },
+      { src: "assets/projects/fjsp/6.jpg", caption: "图 8 / 11" },
+      { src: "assets/projects/fjsp/7.jpg", caption: "图 9 / 11" },
+      { src: "assets/projects/fjsp/8.jpg", caption: "图 10 / 11" },
+      { src: "assets/projects/fjsp/9.jpg", caption: "图 11 / 11" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 8,
+    title: "央美十工作室毕业设计", subtitle: "CAFA Graduation design",
+    date: "2017", location: "Beijing", type: "设计：CAFA 10th Design studio",
+    desc: "建筑类拍摄项目，地点 Beijing，由 CAFA 10th Design studio 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/jzps/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/jzps/10.jpg", caption: "图 2 / 10" },
+      { src: "assets/projects/jzps/2.jpg", caption: "图 3 / 10" },
+      { src: "assets/projects/jzps/3.jpg", caption: "图 4 / 10" },
+      { src: "assets/projects/jzps/4.jpg", caption: "图 5 / 10" },
+      { src: "assets/projects/jzps/5.jpg", caption: "图 6 / 10" },
+      { src: "assets/projects/jzps/6.jpg", caption: "图 7 / 10" },
+      { src: "assets/projects/jzps/7.jpg", caption: "图 8 / 10" },
+      { src: "assets/projects/jzps/8.jpg", caption: "图 9 / 10" },
+      { src: "assets/projects/jzps/9.jpg", caption: "图 10 / 10" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 7,
+    title: "水岸佛堂", subtitle: "Waterside Buddist Shrine",
+    date: "2016", location: "Guye District, Hebei Province, China", type: "设计：ARCHSTUDIO",
+    desc: "建筑类拍摄项目，地点 Guye District, Hebei Province, China，由 ARCHSTUDIO 设计，完成于 2016。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/tsft/0.jpg", caption: "封面 — Guye District, Hebei Province, China" },
+      { src: "assets/projects/tsft/1.jpg", caption: "图 2 / 12" },
+      { src: "assets/projects/tsft/10.jpg", caption: "图 3 / 12" },
+      { src: "assets/projects/tsft/11.jpg", caption: "图 4 / 12" },
+      { src: "assets/projects/tsft/2.jpg", caption: "图 5 / 12" },
+      { src: "assets/projects/tsft/3.jpg", caption: "图 6 / 12" },
+      { src: "assets/projects/tsft/4.jpg", caption: "图 7 / 12" },
+      { src: "assets/projects/tsft/5.jpg", caption: "图 8 / 12" },
+      { src: "assets/projects/tsft/6.jpg", caption: "图 9 / 12" },
+      { src: "assets/projects/tsft/7.jpg", caption: "图 10 / 12" },
+      { src: "assets/projects/tsft/8.jpg", caption: "图 11 / 12" },
+      { src: "assets/projects/tsft/9.jpg", caption: "图 12 / 12" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 5,
+    title: "陌上画廊", subtitle: "Moshang Gallery",
+    date: "2016", location: "Beijing", type: "设计：ZHIZHU Design studio",
+    desc: "建筑类拍摄项目，地点 Beijing，由 ZHIZHU Design studio 设计，完成于 2016。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/mshl/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/mshl/2.jpg", caption: "图 2 / 7" },
+      { src: "assets/projects/mshl/3.jpg", caption: "图 3 / 7" },
+      { src: "assets/projects/mshl/4.jpg", caption: "图 4 / 7" },
+      { src: "assets/projects/mshl/5.jpg", caption: "图 5 / 7" },
+      { src: "assets/projects/mshl/6.jpg", caption: "图 6 / 7" },
+      { src: "assets/projects/mshl/7.jpg", caption: "图 7 / 7" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 8,
+    title: "宴慧餐厅设计", subtitle: "Yanhui Restaurant Design",
+    date: "2019", location: "Shenzhen", type: "设计：Liangzhu Design",
+    desc: "室内类拍摄项目，地点 Shenzhen，由 Liangzhu Design 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/yrdn/1.jpg", caption: "封面 — Shenzhen" },
+      { src: "assets/projects/yrdn/10.jpg", caption: "图 2 / 15" },
+      { src: "assets/projects/yrdn/11.jpg", caption: "图 3 / 15" },
+      { src: "assets/projects/yrdn/12.jpg", caption: "图 4 / 15" },
+      { src: "assets/projects/yrdn/13.jpg", caption: "图 5 / 15" },
+      { src: "assets/projects/yrdn/14.jpg", caption: "图 6 / 15" },
+      { src: "assets/projects/yrdn/15.jpg", caption: "图 7 / 15" },
+      { src: "assets/projects/yrdn/2.jpg", caption: "图 8 / 15" },
+      { src: "assets/projects/yrdn/3.jpg", caption: "图 9 / 15" },
+      { src: "assets/projects/yrdn/4.jpg", caption: "图 10 / 15" },
+      { src: "assets/projects/yrdn/5.jpg", caption: "图 11 / 15" },
+      { src: "assets/projects/yrdn/6.jpg", caption: "图 12 / 15" },
+      { src: "assets/projects/yrdn/7.jpg", caption: "图 13 / 15" },
+      { src: "assets/projects/yrdn/8.jpg", caption: "图 14 / 15" },
+      { src: "assets/projects/yrdn/9.jpg", caption: "图 15 / 15" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 4,
+    title: "杭州某办公室设计", subtitle: "Hangzhou Office Design",
+    date: "2019", location: "Hangzhou", type: "设计：Linping Chen",
+    desc: "室内类拍摄项目，地点 Hangzhou，由 Linping Chen 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/hodn/1.jpg", caption: "封面 — Hangzhou" },
+      { src: "assets/projects/hodn/10.jpg", caption: "图 2 / 20" },
+      { src: "assets/projects/hodn/11.jpg", caption: "图 3 / 20" },
+      { src: "assets/projects/hodn/12.jpg", caption: "图 4 / 20" },
+      { src: "assets/projects/hodn/13.jpg", caption: "图 5 / 20" },
+      { src: "assets/projects/hodn/14.jpg", caption: "图 6 / 20" },
+      { src: "assets/projects/hodn/15.jpg", caption: "图 7 / 20" },
+      { src: "assets/projects/hodn/16.jpg", caption: "图 8 / 20" },
+      { src: "assets/projects/hodn/17.jpg", caption: "图 9 / 20" },
+      { src: "assets/projects/hodn/18.jpg", caption: "图 10 / 20" },
+      { src: "assets/projects/hodn/19.jpg", caption: "图 11 / 20" },
+      { src: "assets/projects/hodn/2.jpg", caption: "图 12 / 20" },
+      { src: "assets/projects/hodn/20.jpg", caption: "图 13 / 20" },
+      { src: "assets/projects/hodn/3.jpg", caption: "图 14 / 20" },
+      { src: "assets/projects/hodn/4.jpg", caption: "图 15 / 20" },
+      { src: "assets/projects/hodn/5.jpg", caption: "图 16 / 20" },
+      { src: "assets/projects/hodn/6.jpg", caption: "图 17 / 20" },
+      { src: "assets/projects/hodn/7.jpg", caption: "图 18 / 20" },
+      { src: "assets/projects/hodn/8.jpg", caption: "图 19 / 20" },
+      { src: "assets/projects/hodn/9.jpg", caption: "图 20 / 20" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 7,
+    title: "广州家装设计", subtitle: "Guangzhou Home Design",
+    date: "2019", location: "Guangzhou", type: "设计：KINJO",
+    desc: "室内类拍摄项目，地点 Guangzhou，由 KINJO 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ghdn/1.jpg", caption: "封面 — Guangzhou" },
+      { src: "assets/projects/ghdn/10.jpg", caption: "图 2 / 12" },
+      { src: "assets/projects/ghdn/11.jpg", caption: "图 3 / 12" },
+      { src: "assets/projects/ghdn/12.jpg", caption: "图 4 / 12" },
+      { src: "assets/projects/ghdn/2.jpg", caption: "图 5 / 12" },
+      { src: "assets/projects/ghdn/3.jpg", caption: "图 6 / 12" },
+      { src: "assets/projects/ghdn/4.jpg", caption: "图 7 / 12" },
+      { src: "assets/projects/ghdn/5.jpg", caption: "图 8 / 12" },
+      { src: "assets/projects/ghdn/6.jpg", caption: "图 9 / 12" },
+      { src: "assets/projects/ghdn/7.jpg", caption: "图 10 / 12" },
+      { src: "assets/projects/ghdn/8.jpg", caption: "图 11 / 12" },
+      { src: "assets/projects/ghdn/9.jpg", caption: "图 12 / 12" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 5,
+    title: "花厨餐厅设计", subtitle: "Tomacado Restaurant Design",
+    date: "2019", location: "Beijing", type: "设计：Liangzhu Design",
+    desc: "室内类拍摄项目，地点 Beijing，由 Liangzhu Design 设计，完成于 2019。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/trdn/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/trdn/10.jpg", caption: "图 2 / 20" },
+      { src: "assets/projects/trdn/11.jpg", caption: "图 3 / 20" },
+      { src: "assets/projects/trdn/12.jpg", caption: "图 4 / 20" },
+      { src: "assets/projects/trdn/13.jpg", caption: "图 5 / 20" },
+      { src: "assets/projects/trdn/14.jpg", caption: "图 6 / 20" },
+      { src: "assets/projects/trdn/15.jpg", caption: "图 7 / 20" },
+      { src: "assets/projects/trdn/16.jpg", caption: "图 8 / 20" },
+      { src: "assets/projects/trdn/17.jpg", caption: "图 9 / 20" },
+      { src: "assets/projects/trdn/18.jpg", caption: "图 10 / 20" },
+      { src: "assets/projects/trdn/19.jpg", caption: "图 11 / 20" },
+      { src: "assets/projects/trdn/2.jpg", caption: "图 12 / 20" },
+      { src: "assets/projects/trdn/20.jpg", caption: "图 13 / 20" },
+      { src: "assets/projects/trdn/3.jpg", caption: "图 14 / 20" },
+      { src: "assets/projects/trdn/4.jpg", caption: "图 15 / 20" },
+      { src: "assets/projects/trdn/5.jpg", caption: "图 16 / 20" },
+      { src: "assets/projects/trdn/6.jpg", caption: "图 17 / 20" },
+      { src: "assets/projects/trdn/7.jpg", caption: "图 18 / 20" },
+      { src: "assets/projects/trdn/8.jpg", caption: "图 19 / 20" },
+      { src: "assets/projects/trdn/9.jpg", caption: "图 20 / 20" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 6,
+    title: "北京乐平办公", subtitle: "Leping Office",
+    date: "2018", location: "Beijing", type: "设计：PAO STUDIO",
+    desc: "室内类拍摄项目，地点 Beijing，由 PAO STUDIO 设计，完成于 2018。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/zjlp/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/zjlp/10.jpg", caption: "图 2 / 10" },
+      { src: "assets/projects/zjlp/2.jpg", caption: "图 3 / 10" },
+      { src: "assets/projects/zjlp/3.jpg", caption: "图 4 / 10" },
+      { src: "assets/projects/zjlp/4.jpg", caption: "图 5 / 10" },
+      { src: "assets/projects/zjlp/5.jpg", caption: "图 6 / 10" },
+      { src: "assets/projects/zjlp/6.jpg", caption: "图 7 / 10" },
+      { src: "assets/projects/zjlp/7.jpg", caption: "图 8 / 10" },
+      { src: "assets/projects/zjlp/8.jpg", caption: "图 9 / 10" },
+      { src: "assets/projects/zjlp/9.jpg", caption: "图 10 / 10" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 8,
+    title: "中央美院多功能厅改造", subtitle: "Central Academy of Fine Arts Multifunction Room",
+    date: "2018", location: "Beijing", type: "设计：ARCHSTUDIO",
+    desc: "室内类拍摄项目，地点 Beijing，由 ARCHSTUDIO 设计，完成于 2018。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/mygnt/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/mygnt/10.jpg", caption: "图 2 / 14" },
+      { src: "assets/projects/mygnt/11.jpg", caption: "图 3 / 14" },
+      { src: "assets/projects/mygnt/12.jpg", caption: "图 4 / 14" },
+      { src: "assets/projects/mygnt/13.jpg", caption: "图 5 / 14" },
+      { src: "assets/projects/mygnt/14.jpg", caption: "图 6 / 14" },
+      { src: "assets/projects/mygnt/2.jpg", caption: "图 7 / 14" },
+      { src: "assets/projects/mygnt/3.jpg", caption: "图 8 / 14" },
+      { src: "assets/projects/mygnt/4.jpg", caption: "图 9 / 14" },
+      { src: "assets/projects/mygnt/5.jpg", caption: "图 10 / 14" },
+      { src: "assets/projects/mygnt/6.jpg", caption: "图 11 / 14" },
+      { src: "assets/projects/mygnt/7.jpg", caption: "图 12 / 14" },
+      { src: "assets/projects/mygnt/8.jpg", caption: "图 13 / 14" },
+      { src: "assets/projects/mygnt/9.jpg", caption: "图 14 / 14" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 4,
+    title: "杭州Knights办公室", subtitle: "Knights Hangzhou Office",
+    date: "2017", location: "Hangzhou", type: "设计：Howard/TEMP",
+    desc: "室内类拍摄项目，地点 Hangzhou，由 Howard/TEMP 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/hzqs/1.jpg", caption: "封面 — Hangzhou" },
+      { src: "assets/projects/hzqs/10.jpg", caption: "图 2 / 11" },
+      { src: "assets/projects/hzqs/11.jpg", caption: "图 3 / 11" },
+      { src: "assets/projects/hzqs/2.jpg", caption: "图 4 / 11" },
+      { src: "assets/projects/hzqs/3.jpg", caption: "图 5 / 11" },
+      { src: "assets/projects/hzqs/4.jpg", caption: "图 6 / 11" },
+      { src: "assets/projects/hzqs/5.jpg", caption: "图 7 / 11" },
+      { src: "assets/projects/hzqs/6.jpg", caption: "图 8 / 11" },
+      { src: "assets/projects/hzqs/7.jpg", caption: "图 9 / 11" },
+      { src: "assets/projects/hzqs/8.jpg", caption: "图 10 / 11" },
+      { src: "assets/projects/hzqs/9.jpg", caption: "图 11 / 11" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 7,
+    title: "沙坪建筑项目", subtitle: "Shaping office",
+    date: "2017", location: "Changsha, Hunan Province", type: "设计：Xiaoxin Liu",
+    desc: "室内类拍摄项目，地点 Changsha, Hunan Province，由 Xiaoxin Liu 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/hnsp1/1.jpg", caption: "封面 — Changsha, Hunan Province" },
+      { src: "assets/projects/hnsp1/10.jpg", caption: "图 2 / 10" },
+      { src: "assets/projects/hnsp1/2.jpg", caption: "图 3 / 10" },
+      { src: "assets/projects/hnsp1/3.jpg", caption: "图 4 / 10" },
+      { src: "assets/projects/hnsp1/4.jpg", caption: "图 5 / 10" },
+      { src: "assets/projects/hnsp1/5.jpg", caption: "图 6 / 10" },
+      { src: "assets/projects/hnsp1/6.jpg", caption: "图 7 / 10" },
+      { src: "assets/projects/hnsp1/7.jpg", caption: "图 8 / 10" },
+      { src: "assets/projects/hnsp1/8.jpg", caption: "图 9 / 10" },
+      { src: "assets/projects/hnsp1/9.jpg", caption: "图 10 / 10" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 5,
+    title: "沙坪建筑项目", subtitle: "Shaping office",
+    date: "2017", location: "Changsha, Hunan Province", type: "设计：Xiaoxin Liu",
+    desc: "室内类拍摄项目，地点 Changsha, Hunan Province，由 Xiaoxin Liu 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/hnsp2/1.jpg", caption: "封面 — Changsha, Hunan Province" },
+      { src: "assets/projects/hnsp2/10.jpg", caption: "图 2 / 14" },
+      { src: "assets/projects/hnsp2/11.jpg", caption: "图 3 / 14" },
+      { src: "assets/projects/hnsp2/12.jpg", caption: "图 4 / 14" },
+      { src: "assets/projects/hnsp2/13.jpg", caption: "图 5 / 14" },
+      { src: "assets/projects/hnsp2/14.jpg", caption: "图 6 / 14" },
+      { src: "assets/projects/hnsp2/2.jpg", caption: "图 7 / 14" },
+      { src: "assets/projects/hnsp2/3.jpg", caption: "图 8 / 14" },
+      { src: "assets/projects/hnsp2/4.jpg", caption: "图 9 / 14" },
+      { src: "assets/projects/hnsp2/5.jpg", caption: "图 10 / 14" },
+      { src: "assets/projects/hnsp2/6.jpg", caption: "图 11 / 14" },
+      { src: "assets/projects/hnsp2/7.jpg", caption: "图 12 / 14" },
+      { src: "assets/projects/hnsp2/8.jpg", caption: "图 13 / 14" },
+      { src: "assets/projects/hnsp2/9.jpg", caption: "图 14 / 14" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 6,
+    title: "中央美院14号楼公共空间改造", subtitle: "Central Academy of Fine Arts Building #14",
+    date: "2017", location: "Beijing", type: "设计：Yuyang",
+    desc: "室内类拍摄项目，地点 Beijing，由 Yuyang 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/mygz/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/mygz/2.jpg", caption: "图 2 / 6" },
+      { src: "assets/projects/mygz/3.jpg", caption: "图 3 / 6" },
+      { src: "assets/projects/mygz/4.jpg", caption: "图 4 / 6" },
+      { src: "assets/projects/mygz/5.jpg", caption: "图 5 / 6" },
+      { src: "assets/projects/mygz/6.jpg", caption: "图 6 / 6" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 8,
+    title: "青岛海底捞金狮广场店", subtitle: "Qingdao Haidilao Golden Lion Square Shop",
+    date: "2017", location: "Qingdao , shandong province, China", type: "设计：Co-Direction Interior Design",
+    desc: "室内类拍摄项目，地点 Qingdao , shandong province, China，由 Co-Direction Interior Design 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/qdhdld/1.jpg", caption: "封面 — Qingdao , shandong province, China" },
+      { src: "assets/projects/qdhdld/10.jpg", caption: "图 2 / 13" },
+      { src: "assets/projects/qdhdld/11.jpg", caption: "图 3 / 13" },
+      { src: "assets/projects/qdhdld/12.jpg", caption: "图 4 / 13" },
+      { src: "assets/projects/qdhdld/13.jpg", caption: "图 5 / 13" },
+      { src: "assets/projects/qdhdld/2.jpg", caption: "图 6 / 13" },
+      { src: "assets/projects/qdhdld/3.jpg", caption: "图 7 / 13" },
+      { src: "assets/projects/qdhdld/4.jpg", caption: "图 8 / 13" },
+      { src: "assets/projects/qdhdld/5.jpg", caption: "图 9 / 13" },
+      { src: "assets/projects/qdhdld/6.jpg", caption: "图 10 / 13" },
+      { src: "assets/projects/qdhdld/7.jpg", caption: "图 11 / 13" },
+      { src: "assets/projects/qdhdld/8.jpg", caption: "图 12 / 13" },
+      { src: "assets/projects/qdhdld/9.jpg", caption: "图 13 / 13" },
+    ]
+  },
+  {
+    cat: "interior", catLabel: "室内 Interior", span: 4,
+    title: "Lily Nails 美甲店系列", subtitle: "Lily Nails Salon",
+    date: "2016", location: "Beijing", type: "设计：ARCHSTUDIO",
+    desc: "室内类拍摄项目，地点 Beijing，由 ARCHSTUDIO 设计，完成于 2016。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/lily/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/lily/10.jpg", caption: "图 2 / 13" },
+      { src: "assets/projects/lily/11.jpg", caption: "图 3 / 13" },
+      { src: "assets/projects/lily/12.jpg", caption: "图 4 / 13" },
+      { src: "assets/projects/lily/13.jpg", caption: "图 5 / 13" },
+      { src: "assets/projects/lily/2.jpg", caption: "图 6 / 13" },
+      { src: "assets/projects/lily/3.jpg", caption: "图 7 / 13" },
+      { src: "assets/projects/lily/4.jpg", caption: "图 8 / 13" },
+      { src: "assets/projects/lily/5.jpg", caption: "图 9 / 13" },
+      { src: "assets/projects/lily/6.jpg", caption: "图 10 / 13" },
+      { src: "assets/projects/lily/7.jpg", caption: "图 11 / 13" },
+      { src: "assets/projects/lily/8.jpg", caption: "图 12 / 13" },
+      { src: "assets/projects/lily/9.jpg", caption: "图 13 / 13" },
+    ]
+  },
+  {
+    cat: "landscape", catLabel: "景观 Landscape", span: 8,
+    title: "一带一路论坛灯光设计", subtitle: "The Belt and Road Conference Lighting Design",
+    date: "2017", location: "Beijing", type: "设计：Duyi",
+    desc: "景观类拍摄项目，地点 Beijing，由 Duyi 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/ydyl/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/ydyl/2.jpg", caption: "图 2 / 6" },
+      { src: "assets/projects/ydyl/3.jpg", caption: "图 3 / 6" },
+      { src: "assets/projects/ydyl/4.jpg", caption: "图 4 / 6" },
+      { src: "assets/projects/ydyl/5.jpg", caption: "图 5 / 6" },
+      { src: "assets/projects/ydyl/6.jpg", caption: "图 6 / 6" },
+    ]
+  },
+  {
+    cat: "landscape", catLabel: "景观 Landscape", span: 4,
+    title: "秦皇岛板城特色小镇", subtitle: "Qin Huangdao Bancheng Town",
+    date: "2017", location: "Qin Huangdao, Hebei Province", type: "设计：CHINA STATE CONSTRUCTION",
+    desc: "景观类拍摄项目，地点 Qin Huangdao, Hebei Province，由 CHINA STATE CONSTRUCTION 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/qhdbc/1.jpg", caption: "封面 — Qin Huangdao, Hebei Province" },
+      { src: "assets/projects/qhdbc/2.jpg", caption: "图 2 / 6" },
+      { src: "assets/projects/qhdbc/3.jpg", caption: "图 3 / 6" },
+      { src: "assets/projects/qhdbc/4.jpg", caption: "图 4 / 6" },
+      { src: "assets/projects/qhdbc/6.jpg", caption: "图 5 / 6" },
+      { src: "assets/projects/qhdbc/7.jpg", caption: "图 6 / 6" },
+    ]
+  },
+  {
+    cat: "landscape", catLabel: "景观 Landscape", span: 12,
+    title: "龙湖地产景粼原著", subtitle: "Longhu Project",
+    date: "2017", location: "Beijing", type: "设计：未知",
+    desc: "景观类拍摄项目，地点 Beijing，由 未知 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/bjlh/1.jpg", caption: "封面 — Beijing" },
+      { src: "assets/projects/bjlh/2.jpg", caption: "图 2 / 7" },
+      { src: "assets/projects/bjlh/3.jpg", caption: "图 3 / 7" },
+      { src: "assets/projects/bjlh/4.jpg", caption: "图 4 / 7" },
+      { src: "assets/projects/bjlh/5.jpg", caption: "图 5 / 7" },
+      { src: "assets/projects/bjlh/6.jpg", caption: "图 6 / 7" },
+      { src: "assets/projects/bjlh/7.jpg", caption: "图 7 / 7" },
+    ]
+  },
+  {
+    cat: "product", catLabel: "产品 Product", span: 12,
+    title: "纸桌与纸砖", subtitle: "Paper Table and Paper Brick",
+    date: "2016", location: "ARCHSTUDIO", type: "设计：未知",
+    desc: "产品类拍摄项目，地点 ARCHSTUDIO，由 未知 设计，完成于 2016。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/zjzz/1.jpg", caption: "封面 — ARCHSTUDIO" },
+      { src: "assets/projects/zjzz/2.jpg", caption: "图 2 / 7" },
+      { src: "assets/projects/zjzz/3.jpg", caption: "图 3 / 7" },
+      { src: "assets/projects/zjzz/4.jpg", caption: "图 4 / 7" },
+      { src: "assets/projects/zjzz/5.jpg", caption: "图 5 / 7" },
+      { src: "assets/projects/zjzz/6.jpg", caption: "图 6 / 7" },
+      { src: "assets/projects/zjzz/7.JPG", caption: "图 7 / 7" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 6,
+    title: "有机农场", subtitle: "Tangshan Organic Farm",
+    date: "2016", location: "唐山市，古冶区", type: "设计：ARCHSTUDIO",
+    desc: "建筑类拍摄项目，地点 唐山市，古冶区，由 ARCHSTUDIO 设计，完成于 2016。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/tsnc/1.jpg", caption: "封面 — 唐山市，古冶区" },
+      { src: "assets/projects/tsnc/10.jpg", caption: "图 2 / 14" },
+      { src: "assets/projects/tsnc/11.jpg", caption: "图 3 / 14" },
+      { src: "assets/projects/tsnc/12.jpg", caption: "图 4 / 14" },
+      { src: "assets/projects/tsnc/13.jpg", caption: "图 5 / 14" },
+      { src: "assets/projects/tsnc/14.jpg", caption: "图 6 / 14" },
+      { src: "assets/projects/tsnc/2.jpg", caption: "图 7 / 14" },
+      { src: "assets/projects/tsnc/3.jpg", caption: "图 8 / 14" },
+      { src: "assets/projects/tsnc/4.jpg", caption: "图 9 / 14" },
+      { src: "assets/projects/tsnc/5.jpg", caption: "图 10 / 14" },
+      { src: "assets/projects/tsnc/6.jpg", caption: "图 11 / 14" },
+      { src: "assets/projects/tsnc/7.jpg", caption: "图 12 / 14" },
+      { src: "assets/projects/tsnc/8.jpg", caption: "图 13 / 14" },
+      { src: "assets/projects/tsnc/9.jpg", caption: "图 14 / 14" },
+    ]
+  },
+  {
+    cat: "architecture", catLabel: "建筑 Architecture", span: 4,
+    title: "小溪家", subtitle: "Springing Stream",
+    date: "2017", location: "福建福鼎", type: "设计：WEI architects",
+    desc: "建筑类拍摄项目，地点 福建福鼎，由 WEI architects 设计，完成于 2017。真实还原空间尺度与材质，兼顾自然光效与场所氛围。",
+    images: [
+      { src: "assets/projects/plfz/1.jpg", caption: "封面 — 福建福鼎" },
+      { src: "assets/projects/plfz/10.jpg", caption: "图 2 / 15" },
+      { src: "assets/projects/plfz/11.jpg", caption: "图 3 / 15" },
+      { src: "assets/projects/plfz/12.jpg", caption: "图 4 / 15" },
+      { src: "assets/projects/plfz/13.jpg", caption: "图 5 / 15" },
+      { src: "assets/projects/plfz/14.jpg", caption: "图 6 / 15" },
+      { src: "assets/projects/plfz/15.jpg", caption: "图 7 / 15" },
+      { src: "assets/projects/plfz/2.jpg", caption: "图 8 / 15" },
+      { src: "assets/projects/plfz/3.jpg", caption: "图 9 / 15" },
+      { src: "assets/projects/plfz/4.jpg", caption: "图 10 / 15" },
+      { src: "assets/projects/plfz/5.jpg", caption: "图 11 / 15" },
+      { src: "assets/projects/plfz/6.jpg", caption: "图 12 / 15" },
+      { src: "assets/projects/plfz/7.jpg", caption: "图 13 / 15" },
+      { src: "assets/projects/plfz/8.jpg", caption: "图 14 / 15" },
+      { src: "assets/projects/plfz/9.jpg", caption: "图 15 / 15" },
+    ]
+  },
+];
 
 
 
-
-		<style type="text/css">
-			*{font-family: '微软雅黑'}
-			h2,p{
-				font-style: normal;
-			}
-			h2 p{
-				padding-bottom: 5px;
-			}
-		</style>
-
-	</head>
-
-	<body class="home page page-id-2 page-template page-template-custom-templates page-template-page-custom page-template-custom-templatespage-custom-php" itemscope itemtype="http://schema.org/WebPage">
-		<div class="wrapper">
-
-			<header class="header">
-
-				<div class="masthead container">
-					<div class="header__menu align-left">
-						<div class="menu nav">
-							Project<br/>
-							<a href="new/index.html">项目</a>
-							
-						</div>
-					</div>
-
-					<div class="header__logo">
-						<div class="menu nav">
-							Weiqi&nbsp;Jin<br/>
-							<a href="index.html" style="font-size:24px">建筑摄影</a>
-							
-						</div>
-					
-					</div>
-
-					<div class="header__menu align-right">
-						<div class="menu nav">
-							About<br>
-						<a href="info/index.html">关于</a></p>
-
-						</div>
-					</div>
-				</div>
-
-			</header>
-
-	<section class="home-page custom-gallery">
-
-		<div class="inner-content">
-
-			<div class="project-listing">
-			<!--list all projects-->
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    <a href="new/index.html"> <img src="http://t3726.bvimg.com/10829/04f3e19446b266c8.jpg">	</a>
-					    		   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index.html#dowebok" title="建筑" class="scroll">
-					    <h2><p>有机农场</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img    src="http://t3726.bvimg.com/10829/09b3756b21f0037d.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index3.html#dbok" title="建筑" class="scroll">
-					    <h2><p>小溪家</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img src="http://t3726.bvimg.com/10829/ba625343d0ce13fa.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index3.html#ldzl" title="建筑" class="scroll">
-					    <h2><p>楼顶竹林间</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img   src="http://t3726.bvimg.com/10829/716126f43adaefbb.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index3.html#bjdy" title="建筑" class="scroll">
-					    <h2><p>叠院儿</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img   src="http://t3726.bvimg.com/10829/afa50dbfb3feb123.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index3.html#bjny" title="建筑" class="scroll">
-					    <h2><p>扭院儿</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img   src="http://t3726.bvimg.com/10829/dbc674444e185adb.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index3.html#tsft" title="建筑" class="scroll">
-					    <h2><p>水岸佛堂</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img   src="http://t3726.bvimg.com/10829/9420c96cd56c9ce9.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index_12.html#mygnt" title="室内" class="scroll">
-					    <h2><p>中央美院多功能厅改造</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img   src="http://t3726.bvimg.com/10829/eff9cf35023ddae1.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index_2.html#qhdbc" title="景观" class="scroll">
-					    <h2><p>秦皇岛板城特色小镇</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-			<article class="portfolio-listing__item">
-					
-				    <div class="portfolio-listing__image">
-				    
-					        <img   src="http://t3726.bvimg.com/10829/88b594fcbf3ad73b.jpg"  />					   
-					</div>
-
-					<div class="portfolio-listing__title">
-				 
-					    <a href="new/index_3.html#zjzz" title="产品" class="scroll">
-					    <h2><p>纸桌与纸砖</p></h2> 
-					    </a>
-				  
-				    </div>
-				</article>
-
-			
-
-
-			
-					
-			</div>
-		</div>
-
-	</section>
-			
-
-			<footer class="footer">
-
-				<div class="inner-footer container">
-
-					<nav role="navigation">
-											</nav>
-
-					<p class="source-org copyright" style="text-align: center;">
-					金伟琦 &copy; 2017 &middot; All rights reserved
-					</p>
-
-				</div>
-
-			</footer>
-		</div><!--end of wrapper-->
-
-
-
-	 <script type='text/javascript' src='new/js/jquery-1.8.0.min.js'></script> 
-	<!--<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.0.min.js'></script>-->
-<!--
-	<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-<script type='text/javascript' src='wp-content/themes/samuelbradley/build/js/scripts.js'></script>
-<script type='text/javascript' src='wp-includes/js/wp-embed.min.js'></script>
--->
-		<script>
-		  // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  // })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-		  // ga('create', 'UA-11438979-4', 'auto');
-		  // ga('send', 'pageview');
-
-		  //on home page show first project image
-        $( ".portfolio-listing__item" ).first().addClass( "show-project-always" );
-
-		  // 对象变量
-		var $scroll = $('.scroll');
-		var index=0;
-		var adTimer = null;
-		// 开始计时
-        adTimer = setInterval(function () {
-        	$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
-            index++;
-           if(index==9){
-           		index=0;
-           		$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
-           }
-
-           $( ".portfolio-listing__item" ).removeClass( "show-project" );
-
-           $( ".portfolio-listing__item" ).eq(index).toggleClass( "show-project" );
-
-
-           $(".portfolio-listing__title").eq(index).fadeTo(1000,0.4);
-          
-
-            if ($( ".portfolio-listing__item" ).hasClass( "show-project" )) {
-              $( ".portfolio-listing__item" ).removeClass( "show-project-always" );
-            } else {
-                $( ".portfolio-listing__item" ).first().addClass( "show-project-always" );
-            }
-
-
-        }, 2000);
-
-		
-		// 事件绑定
-		$scroll.on({
-		    'mouseenter.scroll': function (e) {
-		        e.preventDefault();
-		        // 清除计时
-		        if (adTimer) {
-		            clearTimeout(adTimer);
-		        }
-		        
-		        $(".portfolio-listing__title").fadeTo(0.4,1000);
-		        $( ".portfolio-listing__item" ).removeClass( "show-project" );
-
-		        $(this).parent().parent(".portfolio-listing__item").toggleClass( "show-project" );
-
-
-	            if ($( ".portfolio-listing__item" ).hasClass( "show-project" )) {
-	              $( ".portfolio-listing__item" ).removeClass( "show-project-always" );
-	            } else {
-	                $( ".portfolio-listing__item" ).first().addClass( "show-project-always" );
-	            }
-
-		    },
-		    'mouseleave.scroll': function (e) {
-		        e.preventDefault();
-		         console.info("leave");
-		        // 开始计时
-		        adTimer = setInterval(function () {
-		        	$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
-		            index++;
-		           if(index==9){
-		           		index=0;
-		           		$(".portfolio-listing__title").eq(index).fadeTo(1000,1);
-		           }
-
-		           $( ".portfolio-listing__item" ).removeClass( "show-project" );
-
-		           $( ".portfolio-listing__item" ).eq(index).toggleClass( "show-project" );
-		           $(".portfolio-listing__title").eq(index).fadeTo(1000,0.4);
-
-		            if ($( ".portfolio-listing__item" ).hasClass( "show-project" )) {
-		              $( ".portfolio-listing__item" ).removeClass( "show-project-always" );
-		            } else {
-		                $( ".portfolio-listing__item" ).first().addClass( "show-project-always" );
-		            }
-      
-
-		        }, 2000);
-		    }
+/* ---- render grid ---- */
+const grid = document.getElementById('projects');
+PROJECTS.forEach((p, i) => {
+  const el = document.createElement('article');
+  el.className = `project span-${p.span} reveal`;
+  el.dataset.cat = p.cat;
+  el.dataset.index = i;
+  el.innerHTML = `
+    <div class="project-img-wrap">
+      <span class="project-cat">${p.catLabel}</span>
+      <img class="project-img" src="${p.images[0].src}" alt="${p.title} — ${p.catLabel}" loading="lazy">
+    </div>
+    <div class="project-info">
+      <h3 class="project-title">${p.title}<small>${p.subtitle}</small></h3>
+      <span class="project-meta">${p.location} · ${p.date}</span>
+    </div>`;
+  el.addEventListener('click', () => openLightbox(i, 0));
+  grid.appendChild(el);
 });
 
-		</script>
-		
-	</body>
+/* ---- filter ---- */
+document.getElementById('filterBar').addEventListener('click', (e) => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  document.querySelectorAll('.project').forEach(p => {
+    p.classList.toggle('hidden', f !== 'all' && p.dataset.cat !== f);
+  });
+});
 
-</html> <!-- end of site. Site design and build A L L  I S  M A C H I N E . C O M -->
+/* ---- lightbox ---- */
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+let curProject = 0, curImage = 0;
+
+function openLightbox(pi, ii) {
+  curProject = pi; curImage = ii;
+  const p = PROJECTS[pi];
+  document.getElementById('lbCat').textContent = p.catLabel;
+  document.getElementById('lbTitle').textContent = p.title;
+  document.getElementById('lbSubtitle').textContent = p.subtitle;
+  document.getElementById('lbDesc').textContent = p.desc;
+  document.getElementById('lbMeta').innerHTML = `
+    <div><span>地点</span><b>${p.location}</b></div>
+    <div><span>时间</span><b>${p.date}</b></div>
+    <div><span>类型</span><b>${p.type}</b></div>
+    <div><span>图片</span><b>${p.images.length} 张</b></div>`;
+  const thumbs = document.getElementById('lbThumbs');
+  thumbs.innerHTML = '';
+  p.images.forEach((img, i) => {
+    const t = document.createElement('img');
+    t.className = 'lb-thumb' + (i === ii ? ' active' : '');
+    t.src = img.src; t.alt = img.caption;
+    t.addEventListener('click', () => showImage(i));
+    thumbs.appendChild(t);
+  });
+  document.getElementById('lbMobileInfo').innerHTML = `
+    <p class="lb-cat">${p.catLabel} · ${p.date}</p>
+    <h3 class="lb-title">${p.title}</h3>
+    <p class="lb-desc">${p.desc}</p>`;
+  showImage(ii, true);
+  lb.classList.add('open');
+  requestAnimationFrame(() => lb.classList.add('visible'));
+  document.body.style.overflow = 'hidden';
+}
+function showImage(ii, instant) {
+  const p = PROJECTS[curProject];
+  curImage = (ii + p.images.length) % p.images.length;
+  const apply = () => {
+    lbImg.src = p.images[curImage].src;
+    lbImg.alt = `${p.title} — ${p.images[curImage].caption}`;
+    document.getElementById('lbCounter').textContent = `${curImage + 1} / ${p.images.length}`;
+    document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === curImage));
+    lbImg.onload = () => lbImg.classList.remove('fading');
+  };
+  if (instant) { apply(); return; }
+  lbImg.classList.add('fading');
+  setTimeout(apply, 220);
+}
+function closeLightbox() {
+  lb.classList.remove('visible');
+  setTimeout(() => { lb.classList.remove('open'); document.body.style.overflow = ''; }, 350);
+}
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => showImage(curImage - 1));
+document.getElementById('lbNext').addEventListener('click', () => showImage(curImage + 1));
+lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('lb-main')) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') showImage(curImage - 1);
+  if (e.key === 'ArrowRight') showImage(curImage + 1);
+});
+
+/* ---- nav scroll ---- */
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+/* ---- reveal on scroll ---- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---- clearance radio pills ---- */
+document.getElementById('clearanceRadios').addEventListener('click', (e) => {
+  const pill = e.target.closest('.radio-pill');
+  if (!pill) return;
+  document.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('selected'));
+  pill.classList.add('selected');
+  pill.querySelector('input').checked = true;
+});
+
+/* ---- form ---- */
+document.getElementById('inquiryForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+  const d = Object.fromEntries(new FormData(form).entries());
+  const body = [
+    `项目城市与地址：${d.city}`,
+    `建筑/室内类型及面积：${d.type}`,
+    `期望拍摄时间/天气窗口：${d.time}`,
+    `交付张数/视频需求：${d.deliver}`,
+    `版权用途：${d.usage}`,
+    `清场与人员协调：${d.clearance}`,
+    `联系邮箱：${d.contact}`,
+    d.note ? `补充说明：${d.note}` : ''
+  ].filter(Boolean).join('\n');
+  location.href = `mailto:a20j@qq.com?subject=${encodeURIComponent('商业拍摄询价 — ' + d.city)}&body=${encodeURIComponent(body)}`;
+  document.getElementById('formSuccess').classList.add('show');
+});
+</script>
+</body>
+</html>
